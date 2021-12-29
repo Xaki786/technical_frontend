@@ -1,5 +1,5 @@
 const CompanyName = () => {
-  return <span>Smiling IT &#129312;</span>;
+  return <span>Smiling &#129312;</span>;
 };
 
 export default CompanyName;
