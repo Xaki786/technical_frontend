@@ -1,4 +1,3 @@
-import { useState, MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,7 +6,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { routes } from "../../routes/routes";
 import CompanyName from "../CompanyName/CompanyName";
-import { BrowserRouter as Router, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
   const history = useHistory();
