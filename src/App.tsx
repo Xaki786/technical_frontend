@@ -1,12 +1,22 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { routes } from "./routes/routes";
+import { Container } from "@mui/material";
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Router>
+        <Navbar />
+        <Container maxWidth="xl">
+          <Switch>
+            {routes.map(({ id, url, component }) => (
+              <Route path={url} key={id}>
+                {component}
+              </Route>
+            ))}
+          </Switch>
+        </Container>
+      </Router>
     </div>
   );
 }
