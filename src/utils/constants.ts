@@ -42,3 +42,16 @@ export const castingsValues = [
   "newspapers",
   "magazines",
 ];
+
+export const Selectables: { [key: string]: string[] | number[] } = {
+  gender: genderValues,
+  profession: professionsValues,
+  shoesize: shoesizeValues,
+  hairColor: hairColorValues,
+  hairLength: hairLengthValues,
+  braSize: braSizeValues,
+  waist: waistValues,
+  height: heightValues,
+  weight: weightValues,
+  castings: castingsValues,
+};

@@ -9,19 +9,7 @@ import { Grid } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-
-import {
-  braSizeValues,
-  castingsValues,
-  genderValues,
-  hairColorValues,
-  hairLengthValues,
-  heightValues,
-  professionsValues,
-  shoesizeValues,
-  waistValues,
-  weightValues,
-} from "../../utils/constants";
+import CustomSelect from "../CustomSelect/CustomSelect";
 const SubscriptionForm = () => {
   const form = useForm();
   console.log({ form });
@@ -81,23 +69,11 @@ const SubscriptionForm = () => {
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="gender">Gender</InputLabel>
-                <Select
-                  labelId="gender-label"
-                  id="gender-select"
-                  value={gender}
-                  name="gender"
-                  label="Gender"
-                  onChange={handleChange}
-                >
-                  {genderValues.map((gv) => (
-                    <MenuItem key={gv} value={gv}>
-                      {gv}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"gender"}
+                itemValue={gender}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -107,190 +83,82 @@ const SubscriptionForm = () => {
                   onChange={(newValue) => {
                     setFieldValue("dob", newValue);
                   }}
-                  renderInput={(params) => <TextField {...params} fullWidth/>}
+                  renderInput={(params) => <TextField {...params} fullWidth />}
                 />
               </LocalizationProvider>
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="profession">Profession</InputLabel>
-                <Select
-                  labelId="profession-label"
-                  id="profession-select"
-                  value={profession}
-                  name="profession"
-                  label="Profession"
-                  onChange={handleChange}
-                >
-                  {professionsValues.map((pv) => (
-                    <MenuItem key={pv} value={pv}>
-                      {pv}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"profession"}
+                itemValue={profession}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="shoesize">Shoe Size</InputLabel>
-                <Select
-                  labelId="shoesize-label"
-                  id="shoesize-select"
-                  value={shoesize}
-                  name="shoesize"
-                  label="shoesize"
-                  onChange={handleChange}
-                >
-                  {shoesizeValues.map((sv) => (
-                    <MenuItem key={sv} value={sv}>
-                      {sv}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"shoesize"}
+                itemValue={shoesize}
+              />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="hairColor">Hair Color</InputLabel>
-                <Select
-                  labelId="hairColor-label"
-                  id="hairColor-select"
-                  value={hairColor}
-                  name="hairColor"
-                  label="hairColor"
-                  onChange={handleChange}
-                >
-                  {hairColorValues.map((hc) => (
-                    <MenuItem key={hc} value={hc}>
-                      {hc}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"hairColor"}
+                itemValue={hairColor}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="hairLength">Hair Color</InputLabel>
-                <Select
-                  labelId="hairLength-label"
-                  id="hairLength-select"
-                  value={hairLength}
-                  name="hairLength"
-                  label="hairLength"
-                  onChange={handleChange}
-                >
-                  {hairLengthValues.map((hl) => (
-                    <MenuItem key={hl} value={hl}>
-                      {hl}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"hairLength"}
+                itemValue={hairLength}
+              />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="braSize">Bra Size</InputLabel>
-                <Select
-                  labelId="braSize-label"
-                  id="braSize-select"
-                  value={braSize}
-                  name="braSize"
-                  label="braSize"
-                  onChange={handleChange}
-                >
-                  {braSizeValues.map((hl) => (
-                    <MenuItem key={hl} value={hl}>
-                      {hl}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"braSize"}
+                itemValue={braSize}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="waist">Waist Size</InputLabel>
-                <Select
-                  labelId="waist-label"
-                  id="waist-select"
-                  value={waist}
-                  name="waist"
-                  label="Waist Size"
-                  onChange={handleChange}
-                >
-                  {waistValues.map((ws, i) => (
-                    <MenuItem key={`${ws}-${i}`} value={ws}>
-                      {ws}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"waist"}
+                itemValue={waist}
+              />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="height">Height</InputLabel>
-                <Select
-                  labelId="height-label"
-                  id="height-select"
-                  value={height}
-                  name="height"
-                  label="height"
-                  onChange={handleChange}
-                >
-                  {heightValues.map((hv, i) => (
-                    <MenuItem key={`${hv}-${i}`} value={hv}>
-                      {hv}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"height"}
+                itemValue={height}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel id="weight">Weight</InputLabel>
-                <Select
-                  labelId="weight-label"
-                  id="weight-select"
-                  value={weight}
-                  name="weight"
-                  label="weight"
-                  onChange={handleChange}
-                >
-                  {weightValues.map((wv, i) => (
-                    <MenuItem key={`${wv}-${i}`} value={wv}>
-                      {wv}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"weight"}
+                itemValue={weight}
+              />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={12}>
-              <FormControl fullWidth>
-                <InputLabel id="castings">Castings</InputLabel>
-                <Select
-                  labelId="castings-label"
-                  id="castings-select"
-                  value={castings}
-                  name="castings"
-                  label="castings"
-                  onChange={handleChange}
-                >
-                  {castingsValues.map((wv, i) => (
-                    <MenuItem key={`${wv}-${i}`} value={wv}>
-                      {wv}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+            <CustomSelect
+                handleChange={setFieldValue}
+                item={"castings"}
+                itemValue={castings}
+              />
             </Grid>
           </Grid>
           <Button color="primary" variant="contained" fullWidth type="submit">
