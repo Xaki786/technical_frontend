@@ -6,7 +6,7 @@ const useForm = () => {
       firstName: "",
       lastName: "",
       gender: "",
-      dob: "",
+      dob: new Date(),
       profession: "",
       shoesize: "",
       hairColor: "",
