@@ -8,7 +8,6 @@ import DatePicker from "@mui/lab/DatePicker";
 import CustomSelect from "../CustomSelect/CustomSelect";
 const SubscriptionForm = () => {
   const form = useForm();
-  console.log({ form });
   const {
     values: {
       firstName,
