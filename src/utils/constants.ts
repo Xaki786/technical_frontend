@@ -1,0 +1,10 @@
+export const genderValues = ["Male", "Female", "Other"];
+export const professionsValues = ["commedian", "actor", "actres", "model"];
+export const shoesizeValues = [];
+export const hairColorValues = [];
+export const hairLengthValues = [];
+export const braSizeValues = [];
+export const waistValues = [];
+export const heightValues = [];
+export const weightValues = [];
+export const castingsValues = [];
