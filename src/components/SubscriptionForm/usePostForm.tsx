@@ -1,11 +1,11 @@
 import { useMutation } from "react-query";
 import { Subscription } from "../../utils/types";
-import axios from "axios";
+import Axios from "../../utils/Axios";
+import { Api_Endpoints } from "../../utils/constants";
 const postForm = (url: string, subscription: Subscription): Promise<Response> =>
-  axios.post(url, subscription);
+  Axios.post(url, subscription);
 const usePostForm = () => {
-//   const url = "http://localhost:5000/api/subscription";
-  const url = "https://technical-backend.herokuapp.com/api/subscription";
+  const url = Api_Endpoints.submit_form;
   return useMutation(({ subscription }: { subscription: Subscription }) =>
     postForm(url, subscription)
   );

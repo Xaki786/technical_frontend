@@ -25,9 +25,7 @@ export const braSizeValues = [
   "58AA",
   "60AA",
 ];
-export const waistValues = [
-  24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
-];
+export const waistValues = [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
 const heights: number[] = [];
 const weights: number[] = [];
 for (let i = 150; i < 250; i++) {
@@ -54,4 +52,10 @@ export const Selectables: { [key: string]: string[] | number[] } = {
   height: heightValues,
   weight: weightValues,
   castings: castingsValues,
+};
+
+export const Api_Endpoints = {
+  get_all_subscriptions: "/api/subscription/all",
+  search_subscriptions: "/api/subscription/search",
+  submit_form: "/api/subscription",
 };

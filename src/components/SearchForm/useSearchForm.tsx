@@ -1,5 +1,6 @@
-import axios from "axios";
+import Axios from "../../utils/Axios";
 import { useQuery } from "react-query";
+import { Api_Endpoints } from "../../utils/constants";
 type SearchFormProps = {
   enabled: boolean;
   params: string | null;
@@ -11,12 +12,12 @@ const searchSubscriptions = ({
   url: string;
   params: string | null;
 }) => {
-  return axios.get(`${url}?${params}`);
+  return Axios.get(`${url}?${params}`);
 };
 const useSearchForm = ({ enabled, params }: SearchFormProps) => {
-  let url = "http://localhost:5000/api/subscription/all";
+  let url = Api_Endpoints.get_all_subscriptions;
   if (params) {
-    url = "http://localhost:5000/api/subscription/search";
+    url = Api_Endpoints.search_subscriptions;
   }
 
   return useQuery(
