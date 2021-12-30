@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import useSearchForm from "./useSearchForm";
+import SubscriptionsList from "../Subscriptions/SubscriptionsList";
 
 export default function SearchForm() {
   const [search, setsearch] = useState<string>("");
@@ -21,32 +22,36 @@ export default function SearchForm() {
     setenabled(false);
     setsearch(e.target.value);
   };
-  const {} = useSearchForm({ enabled, params: query });
+  const { data, isSuccess } = useSearchForm({ enabled, params: query });
+  console.log(data);
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-      sx={{ mt: 10 }}
-    >
-      <Grid item xs={12} md={6}>
-        <form onSubmit={handleSubmit}>
-          <Paper sx={{ p: "2px 4px", display: "flex", alignItems: "center" }}>
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search Google Maps"
-              inputProps={{ "aria-label": "search google maps" }}
-              value={search}
-              onChange={handleSearch}
-            />
-            <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-          </Paper>
-        </form>
+    <>
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ mt: 10 }}
+      >
+        <Grid item xs={12} md={6}>
+          <form onSubmit={handleSubmit}>
+            <Paper sx={{ p: "2px 4px", display: "flex", alignItems: "center" }}>
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search Google Maps"
+                inputProps={{ "aria-label": "search google maps" }}
+                value={search}
+                onChange={handleSearch}
+              />
+              <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+            </Paper>
+          </form>
+        </Grid>
       </Grid>
-    </Grid>
+      {isSuccess && <SubscriptionsList items={data?.data?.data} />}
+    </>
   );
 }
