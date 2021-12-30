@@ -1,10 +1,10 @@
-export const genderValues = ["Male", "Female", "Other"];
+export const genderValues = ["male", "female", "other"];
 export const professionsValues = ["commedian", "actor", "actres", "model"];
 export const shoesizeValues = [
   6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14, 15,
 ];
-export const hairColorValues = ["Blonde", "Caramel", "Black", "Brown", "Gray"];
-export const hairLengthValues = ["Long", "Medium", "Short", "Bald"];
+export const hairColorValues = ["blonde", "caramel", "black", "brown", "gray"];
+export const hairLengthValues = ["long", "medium", "short", "bald"];
 export const braSizeValues = [
   "26AA",
   "28AA",

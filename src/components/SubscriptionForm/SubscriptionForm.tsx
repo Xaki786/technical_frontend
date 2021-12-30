@@ -8,6 +8,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import usePostForm from "./usePostForm";
+import Loader from "../Loader/Loader";
 const SubscriptionForm = () => {
   const form = useForm();
   const { isLoading, mutate: postForm } = usePostForm();
@@ -30,6 +31,7 @@ const SubscriptionForm = () => {
     handleChange,
     handleSubmit,
     setFieldValue,
+    resetForm,
     errors,
     touched,
   } = form;
@@ -51,9 +53,10 @@ const SubscriptionForm = () => {
       dob,
     };
     postForm({ subscription });
+    resetForm();
   };
   if (isLoading) {
-    return <h1>Loading</h1>;
+    return <Loader />;
   }
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
