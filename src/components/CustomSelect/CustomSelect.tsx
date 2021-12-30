@@ -6,7 +6,7 @@ import { Selectables } from "../../utils/constants";
 type CustomSelectProps = {
   item: string;
   handleChange: (field: string, value: string) => void;
-  itemValue: string;
+  itemValue: string | number | null | undefined;
 };
 const CustomSelect = ({ item, handleChange, itemValue }: CustomSelectProps) => {
   const list = Selectables[item];
@@ -18,10 +18,11 @@ const CustomSelect = ({ item, handleChange, itemValue }: CustomSelectProps) => {
       <Select
         labelId={`${item}-label-id`}
         id={`${item}-select`}
-        value={itemValue}
+        value={itemValue || ""}
+        defaultValue=""
         name={item}
         label={item}
-        onChange={(e) => handleChange(item, e.target.value)}
+        onChange={(e) => handleChange(item, e.target.value as string)}
       >
         {list.map((listItem, i) => (
           <MenuItem key={`${listItem}-i`} value={listItem}>

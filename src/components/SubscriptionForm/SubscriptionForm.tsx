@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import useForm from "./useForm";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -6,12 +7,14 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import CustomSelect from "../CustomSelect/CustomSelect";
+import usePostForm from "./usePostForm";
 const SubscriptionForm = () => {
   const form = useForm();
+  const { isLoading, mutate: postForm } = usePostForm();
   const {
     values: {
-      firstName,
-      lastName,
+      firstname,
+      lastname,
       gender,
       profession,
       shoesize,
@@ -30,35 +33,57 @@ const SubscriptionForm = () => {
     errors,
     touched,
   } = form;
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    handleSubmit(e);
+    const subscription = {
+      firstname,
+      lastname,
+      gender,
+      profession,
+      shoesize,
+      hairColor,
+      hairLength,
+      braSize,
+      waist,
+      height,
+      weight,
+      castings,
+      dob,
+    };
+    postForm({ subscription });
+  };
+  if (isLoading) {
+    return <h1>Loading</h1>;
+  }
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item xs={12} md={6}>
         <h1>Subscription Form</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleFormSubmit}>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                id="firstName"
-                name="firstName"
+                id="firstname"
+                name="firstname"
                 label="First Name"
-                value={firstName}
+                value={firstname}
                 onChange={handleChange}
-                error={touched.firstName && Boolean(errors.firstName)}
-                helperText={touched.firstName && errors.firstName}
+                error={touched.firstname && Boolean(errors.firstname)}
+                helperText={touched.firstname && errors.firstname}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                id="lastName"
-                name="lastName"
+                id="lastname"
+                name="lastname"
                 label="Last Name"
-                type="lastName"
-                value={lastName}
+                type="lastname"
+                value={lastname}
                 onChange={handleChange}
-                error={touched.lastName && Boolean(errors.lastName)}
-                helperText={touched.lastName && errors.lastName}
+                error={touched.lastname && Boolean(errors.lastname)}
+                helperText={touched.lastname && errors.lastname}
               />
             </Grid>
           </Grid>
@@ -149,7 +174,7 @@ const SubscriptionForm = () => {
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={12}>
-            <CustomSelect
+              <CustomSelect
                 handleChange={setFieldValue}
                 item={"castings"}
                 itemValue={castings}

@@ -1,26 +1,25 @@
-import { useFormik } from "formik";
+import { FormikProps, useFormik } from "formik";
 import { validationSchema } from "./validationSchema";
+import { Subscription } from "../../utils/types";
 const useForm = () => {
-  const formik = useFormik({
+  const formik: FormikProps<Subscription> = useFormik<Subscription>({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      firstname: "",
+      lastname: "",
       gender: "",
       dob: null,
       profession: "",
-      shoesize: "",
+      shoesize: null,
       hairColor: "",
       hairLength: "",
       braSize: "",
-      waist: "",
-      height: "",
-      weight: "",
+      waist: null,
+      height: null,
+      weight: null,
       castings: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit: (values) => {},
   });
   return formik;
 };
