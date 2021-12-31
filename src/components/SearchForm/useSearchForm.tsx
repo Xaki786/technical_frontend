@@ -12,14 +12,13 @@ const searchSubscriptions = ({
   url: string;
   params: string | null;
 }) => {
-  return Axios.get(`${url}?${params}`);
+  return Axios.get(`${url}?search=${params}`);
 };
 const useSearchForm = ({ enabled, params }: SearchFormProps) => {
   let url = Api_Endpoints.get_all_subscriptions;
   if (params) {
-    url = Api_Endpoints.search_subscriptions;
-  }
-
+    url = `${Api_Endpoints.search_subscriptions}`;
+  }  
   return useQuery(
     ["search-form", params],
     () => searchSubscriptions({ url, params: params }),

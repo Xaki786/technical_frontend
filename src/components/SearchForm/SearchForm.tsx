@@ -23,7 +23,6 @@ export default function SearchForm() {
     setsearch(e.target.value);
   };
   const { data, isSuccess } = useSearchForm({ enabled, params: query });
-  console.log(data);
   return (
     <>
       <Grid
@@ -51,7 +50,7 @@ export default function SearchForm() {
           </form>
         </Grid>
       </Grid>
-      {isSuccess && <SubscriptionsList items={data?.data?.data} />}
+      {isSuccess && <SubscriptionsList items={data?.data} />}
     </>
   );
 }

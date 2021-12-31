@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Subscription } from "../../utils/types";
 const SubscriptionsListItem = ({ item }: { item: Subscription }) => {
+  const { firstname, lastname, profession, gender, hairColor, hairLength } =
+    item;
   return (
     <Grid item sx={{ mt: 3 }}>
       <Card sx={{ width: 345 }}>
@@ -18,17 +20,28 @@ const SubscriptionsListItem = ({ item }: { item: Subscription }) => {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {item.firstname} {item.lastname}
+              {firstname} {lastname}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Gender: </strong> {item.gender}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Hair Color: </strong> {item.hairColor}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Hair Length: </strong> {item.hairLength}
-            </Typography>
+            {profession && (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Profession: </strong> {profession}
+              </Typography>
+            )}
+            {gender && (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Gender: </strong> {gender}
+              </Typography>
+            )}
+            {hairColor && (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Hair Color: </strong> {hairColor}
+              </Typography>
+            )}
+            {hairLength && (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Hair Length: </strong> {hairLength}
+              </Typography>
+            )}
           </CardContent>
         </CardActionArea>
       </Card>

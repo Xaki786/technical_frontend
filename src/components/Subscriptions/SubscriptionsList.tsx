@@ -3,7 +3,7 @@ import { Subscription } from "../../utils/types";
 import SubscriptionsListItem from "./SubscriptionsListItem";
 
 const SubscriptionsList = ({ items }: { items: Subscription[] }) => {
-  return (
+  return items?.length ? (
     <Grid
       container
       direction="row"
@@ -15,10 +15,10 @@ const SubscriptionsList = ({ items }: { items: Subscription[] }) => {
       sx={{ mt: 1, p: 1 }}
     >
       {items.map((item) => (
-        <SubscriptionsListItem key={item.firstname} item={item} />
+        <SubscriptionsListItem key={item._id} item={item} />
       ))}
     </Grid>
-  );
+  ) : null;
 };
 
 export default SubscriptionsList;
