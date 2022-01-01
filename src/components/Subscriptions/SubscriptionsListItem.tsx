@@ -15,7 +15,7 @@ const SubscriptionsListItem = ({ item }: { item: Subscription }) => {
           <CardMedia
             component="img"
             height="140"
-            image={item.picture}
+            image={item.picture as string}
             alt={`${item.firstname}-picture`}
           />
           <CardContent>

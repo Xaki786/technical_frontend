@@ -35,6 +35,7 @@ const SubscriptionForm = ({
       weight,
       castings,
       dob,
+      picture,
     },
     handleChange,
     handleSubmit,
@@ -60,18 +61,20 @@ const SubscriptionForm = ({
       weight,
       castings,
       dob,
+      picture,
     };
     if (isFilter) {
       changeFilters(values);
       handleClose();
     } else {
-      resetForm();
+      // resetForm();
       postForm({ subscription });
     }
   };
   if (isLoading) {
     return <Loader />;
   }
+  console.log({picture})
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item xs={12} md={isFilter ? 12 : 6} sx={{ p: isFilter ? 2 : 0 }}>
@@ -196,11 +199,26 @@ const SubscriptionForm = ({
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12} md={6}>
               <CustomSelect
                 handleChange={setFieldValue}
                 item={"castings"}
                 itemValue={castings}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                id="picture"
+                name="picture"
+                // label="Last Name"
+                type="file"
+                // value={picture || null}
+                onChange={(e: any) => {
+                  setFieldValue("picture", e.target.files[0]);
+                }}
+                error={touched.picture && Boolean(errors.picture)}
+                helperText={touched.picture && errors.picture}
               />
             </Grid>
           </Grid>
@@ -212,7 +230,7 @@ const SubscriptionForm = ({
               color="primary"
               variant="contained"
               fullWidth
-              sx={{mt:1}}
+              sx={{ mt: 1 }}
               onClick={() => {
                 resetForm();
                 clearFilters();

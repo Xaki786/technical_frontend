@@ -19,6 +19,7 @@ const useForm = () => {
       height: filters.height,
       weight: filters.weight,
       castings: filters.castings,
+      picture: undefined,
     },
     validationSchema: validationSchema,
     enableReinitialize: true,

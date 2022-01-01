@@ -5,7 +5,7 @@ interface ObjectWithStringIndex {
 export interface Subscription extends ObjectWithStringIndex {
   _id?: string;
   firstname?: string;
-  picture?: string;
+  picture?: string | Blob;
   lastname?: string;
   gender?: string;
   dob?: Date | null;
