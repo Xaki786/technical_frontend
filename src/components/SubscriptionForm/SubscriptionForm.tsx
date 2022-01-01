@@ -75,7 +75,7 @@ const SubscriptionForm = ({
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item xs={12} md={isFilter ? 12 : 6} sx={{ p: isFilter ? 2 : 0 }}>
-        <h1>{isFilter ? "Select Filters" : "Subscription Form"}</h1>
+        <h2>{isFilter ? "Select Filters" : "Subscription Form"}</h2>
         <form onSubmit={handleFormSubmit}>
           {!isFilter && (
             <Grid container spacing={1} sx={{ mb: 2 }}>
@@ -212,6 +212,7 @@ const SubscriptionForm = ({
               color="primary"
               variant="contained"
               fullWidth
+              sx={{mt:1}}
               onClick={() => {
                 resetForm();
                 clearFilters();

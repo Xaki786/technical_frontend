@@ -1,9 +1,4 @@
-import {
-  Collapse,
-  ListItemButton,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Button, Collapse, ListItemButton, ListItemText } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import useFiltersConsumer from "../../hooks/useFiltersConsumer";
@@ -16,12 +11,12 @@ const SelectedFilters = () => {
     setOpen(!open);
   };
 
-  const { filters } = useFiltersConsumer();
+  const { filters, clearFilters } = useFiltersConsumer();
   const FiltersList = Object.fromEntries(
     Object.entries(filters).filter(([_, v]) => v)
   );
   if (isEmpty(filters)) {
-    return <Typography variant="h6">No Filter Selected</Typography>;
+    return null;
   }
   return (
     <>
@@ -40,6 +35,18 @@ const SelectedFilters = () => {
               <ListItemText primary={`${value}`} />
             </ListItem>
           ))}
+          <ListItem key="reset" disableGutters>
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              onClick={() => {
+                clearFilters();
+              }}
+            >
+              Clear Filters
+            </Button>
+          </ListItem>
         </Collapse>
       </List>
     </>

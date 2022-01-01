@@ -64,7 +64,9 @@ export default function SearchForm() {
                 <SearchIcon />
               </IconButton>
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-              <Filters />
+              <IconButton aria-label="filter">
+                <Filters />
+              </IconButton>
             </Paper>
           </form>
         </Grid>

@@ -30,7 +30,7 @@ export default function Filters() {
       >
         <SubscriptionForm isFilter={true} handleClose={handleClose}/>
         <DialogTitle id="responsive-dialog-title">
-          Select Various Filters to refine subscriptions
+          Select various filters to refine models
         </DialogTitle>
       </Dialog>
     </div>
