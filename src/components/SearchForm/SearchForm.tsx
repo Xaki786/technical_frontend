@@ -4,11 +4,12 @@ import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSearchForm from "./useSearchForm";
 import SubscriptionsList from "../Subscriptions/SubscriptionsList";
 import Filters from "../Filters/Filters";
 import useFiltersConsumer from "../../hooks/useFiltersConsumer";
+import SelectedFilters from "./SelectedFilters";
 export default function SearchForm() {
   const [search, setsearch] = useState<string>("");
   const [enabled, setenabled] = useState(false);
@@ -16,7 +17,6 @@ export default function SearchForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setenabled(true);
-    setsearch("");
     setquery(search);
   };
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +24,14 @@ export default function SearchForm() {
     setsearch(e.target.value);
   };
   const { filters } = useFiltersConsumer();
-  const { data, isSuccess } = useSearchForm({ enabled, params: query, filters });
+  const { data, isSuccess, refetch } = useSearchForm({
+    enabled,
+    params: query,
+    filters,
+  });
+  useEffect(() => {
+    refetch();
+  }, [filters, refetch]);
   return (
     <>
       <Grid
@@ -32,7 +39,16 @@ export default function SearchForm() {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ mt: 10 }}
+      >
+        <SelectedFilters />
+      </Grid>
+
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ mt: 1 }}
       >
         <Grid item xs={12} md={6}>
           <form onSubmit={handleSubmit}>

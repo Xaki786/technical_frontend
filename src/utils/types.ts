@@ -1,5 +1,8 @@
 import { FormEvent } from "react";
-export interface Subscription {
+interface ObjectWithStringIndex {
+  [key: string]: any;
+}
+export interface Subscription extends ObjectWithStringIndex {
   _id?: string;
   firstname?: string;
   picture?: string;
@@ -20,4 +23,5 @@ export interface Subscription {
 export interface IfiltersContext {
   changeFilters: (values: Subscription) => void;
   filters: Subscription;
+  clearFilters: () => void;
 }

@@ -14,13 +14,18 @@ const searchSubscriptions = (url: string) => {
 };
 const useSearchForm = ({ enabled, params, filters }: SearchFormProps) => {
   let url = Api_Endpoints.get_all_subscriptions;
-  let query = qString.stringify(filters);
+  let query = qString.stringify(
+    Object.fromEntries(Object.entries(filters).filter(([_, v]) => v))
+  );
+  if (!isEmpty(filters)) {
+    url = `${url}?${query}`;
+  }
   if (params) {
     url = `${Api_Endpoints.search_subscriptions}`;
-  }
-  url = `${url}?search=${params}`;
-  if (!isEmpty(filters)) {
-    url = `${url}&${query}`;
+    url = `${url}?search=${params}`;
+    if (!isEmpty(filters)) {
+      url = `${url}&${query}`;
+    }
   }
   return useQuery(["search-form", params], () => searchSubscriptions(url), {
     enabled: enabled && params !== null,

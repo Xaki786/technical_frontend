@@ -21,6 +21,7 @@ const useForm = () => {
       castings: filters.castings,
     },
     validationSchema: validationSchema,
+    enableReinitialize: true,
     onSubmit: (values) => {},
   });
   return formik;

@@ -43,7 +43,7 @@ const SubscriptionForm = ({
     errors,
     touched,
   } = form;
-  const { changeFilters } = useFiltersConsumer();
+  const { changeFilters, clearFilters } = useFiltersConsumer();
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     handleSubmit(e);
     const subscription: { [key: string]: any } = {
@@ -207,6 +207,19 @@ const SubscriptionForm = ({
           <Button color="primary" variant="contained" fullWidth type="submit">
             {isFilter ? "Filter" : "Submit"}
           </Button>
+          {isFilter && (
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              onClick={() => {
+                resetForm();
+                clearFilters();
+              }}
+            >
+              Reset Filters
+            </Button>
+          )}
         </form>
       </Grid>
     </Grid>
