@@ -10,6 +10,7 @@ import SubscriptionsList from "../Subscriptions/SubscriptionsList";
 import Filters from "../Filters/Filters";
 import useFiltersConsumer from "../../hooks/useFiltersConsumer";
 import SelectedFilters from "./SelectedFilters";
+import { CircularProgress } from "@mui/material";
 export default function SearchForm() {
   const [search, setsearch] = useState<string>("");
   const [enabled, setenabled] = useState(false);
@@ -24,7 +25,7 @@ export default function SearchForm() {
     setsearch(e.target.value);
   };
   const { filters } = useFiltersConsumer();
-  const { data, isSuccess, refetch } = useSearchForm({
+  const { data, isSuccess, refetch, isLoading, isFetching } = useSearchForm({
     enabled,
     params: query,
     filters,
@@ -61,7 +62,7 @@ export default function SearchForm() {
                 onChange={handleSearch}
               />
               <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon />
+                {isLoading || isFetching ? <CircularProgress size={20}/> : <SearchIcon />}
               </IconButton>
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <IconButton aria-label="filter">

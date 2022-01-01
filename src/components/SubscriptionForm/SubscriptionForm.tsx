@@ -74,7 +74,6 @@ const SubscriptionForm = ({
   if (isLoading) {
     return <Loader />;
   }
-  console.log({picture})
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item xs={12} md={isFilter ? 12 : 6} sx={{ p: isFilter ? 2 : 0 }}>
