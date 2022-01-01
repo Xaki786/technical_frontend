@@ -9,10 +9,18 @@ import DatePicker from "@mui/lab/DatePicker";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import usePostForm from "./usePostForm";
 import Loader from "../Loader/Loader";
-const SubscriptionForm = () => {
+import useFiltersConsumer from "../../hooks/useFiltersConsumer";
+const SubscriptionForm = ({
+  isFilter = false,
+  handleClose = () => {},
+}: {
+  isFilter?: boolean;
+  handleClose?: () => void;
+}) => {
   const form = useForm();
   const { isLoading, mutate: postForm } = usePostForm();
   const {
+    values,
     values: {
       firstname,
       lastname,
@@ -35,9 +43,10 @@ const SubscriptionForm = () => {
     errors,
     touched,
   } = form;
+  const { changeFilters } = useFiltersConsumer();
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     handleSubmit(e);
-    const subscription = {
+    const subscription: { [key: string]: any } = {
       firstname,
       lastname,
       gender,
@@ -52,64 +61,75 @@ const SubscriptionForm = () => {
       castings,
       dob,
     };
-    postForm({ subscription });
-    resetForm();
+    if (isFilter) {
+      changeFilters(values);
+      handleClose();
+    } else {
+      resetForm();
+      postForm({ subscription });
+    }
   };
   if (isLoading) {
     return <Loader />;
   }
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Grid item xs={12} md={6}>
-        <h1>Subscription Form</h1>
+      <Grid item xs={12} md={isFilter ? 12 : 6} sx={{ p: isFilter ? 2 : 0 }}>
+        <h1>{isFilter ? "Select Filters" : "Subscription Form"}</h1>
         <form onSubmit={handleFormSubmit}>
-          <Grid container spacing={1} sx={{ mb: 2 }}>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                id="firstname"
-                name="firstname"
-                label="First Name"
-                value={firstname}
-                onChange={handleChange}
-                error={touched.firstname && Boolean(errors.firstname)}
-                helperText={touched.firstname && errors.firstname}
-              />
+          {!isFilter && (
+            <Grid container spacing={1} sx={{ mb: 2 }}>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  fullWidth
+                  id="firstname"
+                  name="firstname"
+                  label="First Name"
+                  value={firstname}
+                  onChange={handleChange}
+                  error={touched.firstname && Boolean(errors.firstname)}
+                  helperText={touched.firstname && errors.firstname}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  fullWidth
+                  id="lastname"
+                  name="lastname"
+                  label="Last Name"
+                  type="lastname"
+                  value={lastname}
+                  onChange={handleChange}
+                  error={touched.lastname && Boolean(errors.lastname)}
+                  helperText={touched.lastname && errors.lastname}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                id="lastname"
-                name="lastname"
-                label="Last Name"
-                type="lastname"
-                value={lastname}
-                onChange={handleChange}
-                error={touched.lastname && Boolean(errors.lastname)}
-                helperText={touched.lastname && errors.lastname}
-              />
-            </Grid>
-          </Grid>
+          )}
           <Grid container spacing={1} sx={{ mb: 2 }}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={isFilter ? 12 : 6}>
               <CustomSelect
                 handleChange={setFieldValue}
                 item={"gender"}
                 itemValue={gender}
               />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
-                  label="Date of Birth"
-                  value={dob}
-                  onChange={(newValue) => {
-                    setFieldValue("dob", newValue);
-                  }}
-                  renderInput={(params) => <TextField {...params} fullWidth />}
-                />
-              </LocalizationProvider>
-            </Grid>
+            {!isFilter && (
+              <Grid item xs={12} md={6}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label="Date of Birth"
+                    value={dob}
+                    onChange={(newValue) => {
+                      setFieldValue("dob", newValue);
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} fullWidth />
+                    )}
+                  />
+                </LocalizationProvider>
+              </Grid>
+            )}
           </Grid>
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={6}>
@@ -185,7 +205,7 @@ const SubscriptionForm = () => {
             </Grid>
           </Grid>
           <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
+            {isFilter ? "Filter" : "Submit"}
           </Button>
         </form>
       </Grid>

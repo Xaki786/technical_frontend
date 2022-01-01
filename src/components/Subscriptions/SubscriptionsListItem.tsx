@@ -15,8 +15,8 @@ const SubscriptionsListItem = ({ item }: { item: Subscription }) => {
           <CardMedia
             component="img"
             height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
-            alt="green iguana"
+            image={item.picture}
+            alt={`${item.firstname}-picture`}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">

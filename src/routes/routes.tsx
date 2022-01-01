@@ -1,5 +1,6 @@
 import SubscriptionForm from "../components/SubscriptionForm/SubscriptionForm";
 import SearchForm from "../components/SearchForm/SearchForm";
+import { FiltersProvier } from "../context/FiltersContext/FiltersProvider";
 export const routes = [
   {
     id: "subscription_form",
@@ -11,6 +12,10 @@ export const routes = [
     id: "search_form",
     name: "Search",
     url: "/search_form",
-    component: <SearchForm />,
+    component: (
+      <FiltersProvier>
+        <SearchForm />
+      </FiltersProvier>
+    ),
   },
 ];

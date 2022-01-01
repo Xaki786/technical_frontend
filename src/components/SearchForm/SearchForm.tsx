@@ -7,7 +7,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import useSearchForm from "./useSearchForm";
 import SubscriptionsList from "../Subscriptions/SubscriptionsList";
-
+import Filters from "../Filters/Filters";
+import useFiltersConsumer from "../../hooks/useFiltersConsumer";
 export default function SearchForm() {
   const [search, setsearch] = useState<string>("");
   const [enabled, setenabled] = useState(false);
@@ -22,7 +23,8 @@ export default function SearchForm() {
     setenabled(false);
     setsearch(e.target.value);
   };
-  const { data, isSuccess } = useSearchForm({ enabled, params: query });
+  const { filters } = useFiltersConsumer();
+  const { data, isSuccess } = useSearchForm({ enabled, params: query, filters });
   return (
     <>
       <Grid
@@ -46,6 +48,7 @@ export default function SearchForm() {
                 <SearchIcon />
               </IconButton>
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+              <Filters />
             </Paper>
           </form>
         </Grid>

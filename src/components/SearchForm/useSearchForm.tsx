@@ -1,31 +1,30 @@
 import Axios from "../../utils/Axios";
 import { useQuery } from "react-query";
 import { Api_Endpoints } from "../../utils/constants";
+import { Subscription } from "../../utils/types";
+import isEmpty from "lodash/isEmpty";
+import qString from "query-string";
 type SearchFormProps = {
   enabled: boolean;
   params: string | null;
+  filters: Subscription;
 };
-const searchSubscriptions = ({
-  url,
-  params,
-}: {
-  url: string;
-  params: string | null;
-}) => {
-  return Axios.get(`${url}?search=${params}`);
+const searchSubscriptions = (url: string) => {
+  return Axios.get(url);
 };
-const useSearchForm = ({ enabled, params }: SearchFormProps) => {
+const useSearchForm = ({ enabled, params, filters }: SearchFormProps) => {
   let url = Api_Endpoints.get_all_subscriptions;
+  let query = qString.stringify(filters);
   if (params) {
     url = `${Api_Endpoints.search_subscriptions}`;
-  }  
-  return useQuery(
-    ["search-form", params],
-    () => searchSubscriptions({ url, params: params }),
-    {
-      enabled: enabled && params !== null,
-    }
-  );
+  }
+  url = `${url}?search=${params}`;
+  if (!isEmpty(filters)) {
+    url = `${url}&${query}`;
+  }
+  return useQuery(["search-form", params], () => searchSubscriptions(url), {
+    enabled: enabled && params !== null,
+  });
 };
 
 export default useSearchForm;
