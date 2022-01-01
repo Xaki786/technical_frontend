@@ -7,7 +7,7 @@ const SubscriptionsList = ({ items }: { items: Subscription[] }) => {
     <Grid
       container
       direction="row"
-      justifyContent="flex-start"
+      justifyContent="center"
       alignItems="center"
       alignContent="center"
       flexWrap="wrap"

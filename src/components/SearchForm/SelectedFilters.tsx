@@ -5,6 +5,8 @@ import useFiltersConsumer from "../../hooks/useFiltersConsumer";
 import isEmpty from "lodash/isEmpty";
 import { useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { removeEmptyValues } from "../../utils/utlils";
+
 const SelectedFilters = () => {
   const [open, setOpen] = useState(true);
   const handleClick = () => {
@@ -12,9 +14,7 @@ const SelectedFilters = () => {
   };
 
   const { filters, clearFilters } = useFiltersConsumer();
-  const FiltersList = Object.fromEntries(
-    Object.entries(filters).filter(([_, v]) => v)
-  );
+  const FiltersList = removeEmptyValues(filters);
   if (isEmpty(filters)) {
     return null;
   }

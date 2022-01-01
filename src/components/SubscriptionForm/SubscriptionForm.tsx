@@ -10,6 +10,7 @@ import CustomSelect from "../CustomSelect/CustomSelect";
 import usePostForm from "./usePostForm";
 import Loader from "../Loader/Loader";
 import useFiltersConsumer from "../../hooks/useFiltersConsumer";
+import { useEffect } from "react";
 const SubscriptionForm = ({
   isFilter = false,
   handleClose = () => {},
@@ -38,6 +39,7 @@ const SubscriptionForm = ({
       picture,
     },
     handleChange,
+    isInitialValid,
     handleSubmit,
     setFieldValue,
     resetForm,
@@ -47,6 +49,9 @@ const SubscriptionForm = ({
   const { changeFilters, clearFilters } = useFiltersConsumer();
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     handleSubmit(e);
+    if ((!firstname || !lastname || !picture) && !isFilter) {
+      return;
+    }
     const subscription: { [key: string]: any } = {
       firstname,
       lastname,
@@ -67,7 +72,7 @@ const SubscriptionForm = ({
       changeFilters(values);
       handleClose();
     } else {
-      // resetForm();
+      resetForm();
       postForm({ subscription });
     }
   };
@@ -108,15 +113,21 @@ const SubscriptionForm = ({
               </Grid>
             </Grid>
           )}
-          <Grid container spacing={1} sx={{ mb: 2 }}>
-            <Grid item xs={12} md={isFilter ? 12 : 6}>
-              <CustomSelect
-                handleChange={setFieldValue}
-                item={"gender"}
-                itemValue={gender}
-              />
-            </Grid>
-            {!isFilter && (
+          {!isFilter && (
+            <Grid container spacing={1} sx={{ mb: 2 }}>
+              <Grid item xs={12} md={isFilter ? 12 : 6}>
+                <TextField
+                  fullWidth
+                  id="picture"
+                  name="picture"
+                  type="file"
+                  onChange={(e: any) => {
+                    setFieldValue("picture", e.target.files[0]);
+                  }}
+                  error={touched.picture && Boolean(errors.picture)}
+                  helperText={touched.picture && errors.picture}
+                />
+              </Grid>
               <Grid item xs={12} md={6}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
@@ -131,8 +142,8 @@ const SubscriptionForm = ({
                   />
                 </LocalizationProvider>
               </Grid>
-            )}
-          </Grid>
+            </Grid>
+          )}
           <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12} md={6}>
               <CustomSelect
@@ -206,18 +217,10 @@ const SubscriptionForm = ({
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                id="picture"
-                name="picture"
-                // label="Last Name"
-                type="file"
-                // value={picture || null}
-                onChange={(e: any) => {
-                  setFieldValue("picture", e.target.files[0]);
-                }}
-                error={touched.picture && Boolean(errors.picture)}
-                helperText={touched.picture && errors.picture}
+              <CustomSelect
+                handleChange={setFieldValue}
+                item={"gender"}
+                itemValue={gender}
               />
             </Grid>
           </Grid>

@@ -10,7 +10,7 @@ const SubscriptionsListItem = ({ item }: { item: Subscription }) => {
     item;
   return (
     <Grid item sx={{ mt: 3 }}>
-      <Card sx={{ width: 345 }}>
+      <Card sx={{ minWidth: 280, maxWidth: 420, width: "100%" }}>
         <CardActionArea>
           <CardMedia
             component="img"
