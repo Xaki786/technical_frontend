@@ -10,7 +10,6 @@ import CustomSelect from "../CustomSelect/CustomSelect";
 import usePostForm from "./usePostForm";
 import Loader from "../Loader/Loader";
 import useFiltersConsumer from "../../hooks/useFiltersConsumer";
-import { useEffect } from "react";
 const SubscriptionForm = ({
   isFilter = false,
   handleClose = () => {},
@@ -39,7 +38,6 @@ const SubscriptionForm = ({
       picture,
     },
     handleChange,
-    isInitialValid,
     handleSubmit,
     setFieldValue,
     resetForm,
