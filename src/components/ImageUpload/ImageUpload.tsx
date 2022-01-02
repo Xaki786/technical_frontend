@@ -11,12 +11,12 @@ type ImageUploadProps = {
   ) => void;
 };
 const ImageUpload = ({ handleImageChange }: ImageUploadProps) => {
-  const [file, setfile] = useState();
-  const onDrop = useCallback((acceptedFiles) => {
+  const [file, setfile] = useState<Blob>();
+  const onDrop = (acceptedFiles: File[]) => {
     handleImageChange("picture", acceptedFiles[0]);
     setfile(acceptedFiles[0]);
     // Do something with the files
-  }, []);
+  };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <>
