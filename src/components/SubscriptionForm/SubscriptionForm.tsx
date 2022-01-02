@@ -2,7 +2,7 @@ import { FormEvent } from "react";
 import useForm from "./useForm";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
@@ -10,6 +10,7 @@ import CustomSelect from "../CustomSelect/CustomSelect";
 import usePostForm from "./usePostForm";
 import Loader from "../Loader/Loader";
 import useFiltersConsumer from "../../hooks/useFiltersConsumer";
+import ImageUpload from "../ImageUpload/ImageUpload";
 const SubscriptionForm = ({
   isFilter = false,
   handleClose = () => {},
@@ -84,6 +85,16 @@ const SubscriptionForm = ({
         <form onSubmit={handleFormSubmit}>
           {!isFilter && (
             <Grid container spacing={1} sx={{ mb: 2 }}>
+              <Grid item xs={12}>
+                <ImageUpload handleImageChange={setFieldValue} />
+                <Typography sx={{ color: "red" }}>
+                  {touched.picture && errors.picture}
+                </Typography>
+              </Grid>
+            </Grid>
+          )}
+          {!isFilter && (
+            <Grid container spacing={1} sx={{ mb: 2 }}>
               <Grid item xs={12} md={6}>
                 <TextField
                   fullWidth
@@ -113,20 +124,7 @@ const SubscriptionForm = ({
           )}
           {!isFilter && (
             <Grid container spacing={1} sx={{ mb: 2 }}>
-              <Grid item xs={12} md={isFilter ? 12 : 6}>
-                <TextField
-                  fullWidth
-                  id="picture"
-                  name="picture"
-                  type="file"
-                  onChange={(e: any) => {
-                    setFieldValue("picture", e.target.files[0]);
-                  }}
-                  error={touched.picture && Boolean(errors.picture)}
-                  helperText={touched.picture && errors.picture}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={12}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     label="Date of Birth"
