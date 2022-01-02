@@ -8,7 +8,7 @@ const SeedDb = () => {
   const { isLoading, isSuccess, isError } = useQuery(
     "seed-db",
     () => Axios.get("/api/seed-db"),
-    { enabled: startSeed }
+    { enabled: startSeed, cacheTime: 0 }
   );
 
   if (isLoading) {
