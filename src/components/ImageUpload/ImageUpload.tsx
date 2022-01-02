@@ -1,6 +1,6 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import DropZoneIcon from "./DropZoneIcon";
 type ImageUploadProps = {
